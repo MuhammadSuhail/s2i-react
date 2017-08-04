@@ -20,10 +20,15 @@ if [ "$(ls /tmp/artifacts/ 2>/dev/null)" ]; then
 fi
 
 echo "---> Installing application source..."
-cp -Rf /tmp/src/. ./
 
+
+cp -Rvf /tmp/src/. ./
+export NODE_ENV=development
+npm install
+npm install react-scripts
+mkdir -p to_serve/spa
 echo "---> Building application from source..."
 # TODO: Add build steps for your application, eg npm install, bundle install, pip install, etc.
-npm install
-react-scripts build
-cp -r build to_serve/spa
+#react-scripts build
+#icp -r build to_serve/spa
+npm run build
