@@ -1,13 +1,13 @@
-#!/bin/bash -e
+#!/bin/sh -e
 #
-# S2I assemble script for the 'scala-server' image.
+# S2I assemble script for the 'react application' image.
 # The 'assemble' script builds your application source so that it is ready to run.
 #
-# For more information refer to the documentation:
-#	https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
+# For more information refer to the documentation at:
+#	https://github.com/sirtow/s2i-react
 #
 
-# If the 'scala-server' assemble script is executed with the '-h' flag, print the usage.
+# If the  assemble script is executed with the '-h' flag, print the usage.
 if [[ "$1" == "-h" ]]; then
 	exec /usr/libexec/s2i/usage
 fi
@@ -28,7 +28,5 @@ npm install
 npm install react-scripts
 mkdir -p to_serve/spa
 echo "---> Building application from source..."
-# TODO: Add build steps for your application, eg npm install, bundle install, pip install, etc.
-#react-scripts build
-#icp -r build to_serve/spa
+
 npm run build
