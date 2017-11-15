@@ -10,7 +10,13 @@ LABEL io.k8s.description="S2I to build a React application" \
 # TODO: Drop the root user and make the content of /opt/app-root owned by user 1001
 # RUN chown -R 1001:1001 /opt/app-root
 COPY ./s2i/bin/ /usr/libexec/s2i
-
+RUN apk add --update \
+    python \
+    python-dev \
+    py-pip \
+    build-base \
+  && pip install virtualenv \
+  && rm -rf /var/cache/apk/*
 RUN npm install -g create-react-app
 
 # This default user is created in the openshift/base-centos7 image
