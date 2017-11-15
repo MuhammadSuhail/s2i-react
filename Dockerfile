@@ -12,7 +12,13 @@ LABEL io.k8s.description="S2I to build a React application" \
 COPY ./s2i/bin/ /usr/libexec/s2i
 
 RUN npm install -g create-react-app
-
+RUN apk add --update \
+    python \
+    python-dev \
+    py-pip \
+    build-base \
+  && pip install virtualenv \
+  && rm -rf /var/cache/apk/*
 # This default user is created in the openshift/base-centos7 image
 USER 1000
 
